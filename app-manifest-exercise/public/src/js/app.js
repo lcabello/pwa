@@ -1,3 +1,5 @@
+var deferredPrompt;
+
 if ('serviceWorker' in navigator) {
   navigator
     .serviceWorker
@@ -6,3 +8,10 @@ if ('serviceWorker' in navigator) {
       console.log('service worker register');
     });
 }
+
+window.addEventListener('beforeinstallprompt', function(event) {
+  console.log('beforeinstallprompt fired')
+  event.preventDefault();
+  deferredPrompt = event;
+  return false;
+});
